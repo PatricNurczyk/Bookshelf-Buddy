@@ -1,5 +1,5 @@
 # Bookshelf-Buddy
-
+![Logo](logo.png)
 ## Project Team
 - Patric Nurczyk
 - McKenna Warrick
