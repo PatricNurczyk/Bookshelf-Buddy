@@ -1,0 +1,8 @@
+.category-shelf{
+    border-top: 5px solid rgb(49, 21, 4);
+    border-bottom: 5px solid rgb(49, 21, 4);
+}
+
+.category{
+    text-decoration: underline;
+}
