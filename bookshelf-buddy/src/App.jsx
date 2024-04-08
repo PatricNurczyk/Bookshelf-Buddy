@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginManager from './containers/loginManager';
 import CategoryShelves from "./containers/CategoryShelves"
@@ -7,6 +7,18 @@ import './stylesheets/App.css'
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+  useEffect(() => {
+    if (user !== undefined && user.email) {
+      let url = 'http://localhost:8080/login_check?email=' + user.email;
+      console.log(url)
+      fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+    }
+  }, []);
+
 
   return (
     <>
@@ -24,7 +36,7 @@ function App() {
             </Stack>
           </Col>
           <Col className='shelf main-shelf p-0'>
-           <CategoryShelves />
+           <CategoryShelves user={isAuthenticated === true ? user.email : undefined}/>
           </Col>
         </Row>
       </Container>
