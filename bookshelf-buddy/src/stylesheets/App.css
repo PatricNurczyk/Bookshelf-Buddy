@@ -60,3 +60,19 @@
 .main-shelf {
   border-radius: 0 0 5px 0;
 }
+
+.form-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem; /* Adjust the gap between columns */
+  padding: 0.5rem;
+}
+
+.form-group label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.form-group input {
+  padding: 0.5rem;
+}

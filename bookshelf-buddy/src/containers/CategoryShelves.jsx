@@ -4,7 +4,7 @@ import Stack from "react-bootstrap/Stack"
 import "../stylesheets/scroll_cont.css"
 
 
-function CategoryShelves({user}) {
+function CategoryShelves({user, addBookClick}) {
 
     const [category, setCategory] = useState([]);
 
@@ -22,15 +22,17 @@ function CategoryShelves({user}) {
     return (
         <div className="scroll-container">
             <Stack>
-                <Shelf category="All Books" user={user}/>
+                <Shelf category={{category: "All Books", category_id: 0}} user={user} addBookClick={addBookClick}/>
                 {category.length > 0 ? (
                     category.map((item, index) => (
-                        <Shelf category={item.category} user={user}/>
+                        <Shelf category={item} user={user} onAddClick={addBookClick}/>
                     ))
                 ) : (
                     <div></div>
                 )}
             </Stack>
+            <h3>Add New Category</h3>
+            <button className="add-btn"></button>
         </div>
     );
 }
