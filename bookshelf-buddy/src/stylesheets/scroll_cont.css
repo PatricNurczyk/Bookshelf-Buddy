@@ -12,3 +12,19 @@
     border: none;
     margin-bottom: 8%;
 }
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.2rem; /* Adjust the gap between columns */
+    padding: 0.5rem;
+}
+
+.form-group label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.form-group input {
+    padding: 0.5rem;
+}

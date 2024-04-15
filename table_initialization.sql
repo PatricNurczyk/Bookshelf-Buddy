@@ -1,6 +1,8 @@
 USE `bookshelf_buddy`;
 
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bookshelf_admin';
+
+CREATE USER 'bookshelf'@'localhost';
+ALTER USER 'bookshelf'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bookshelf_admin';
 
 DROP TABLE IF EXISTS book_category;
 DROP TABLE IF EXISTS book_goals;

@@ -8,12 +8,12 @@ appearance: none;
 width: 100%;
 height: 20px;
 border-radius: 10px;
-background-color: #e0e0e0;
+background-color: #484848;
 overflow: hidden;
 }
 
 .custom-progress::-webkit-progress-bar {
-background-color: #e0e0e0; /* Background color of the progress bar */
+background-color: #484848; /* Background color of the progress bar */
 border-radius: 10px;
 }
 
@@ -27,13 +27,26 @@ background-color: #4caf50; /* Green color for the progress */
 border-radius: 10px;
 }
 
+.book-container{
+    position: relative;
+}
+
 .book {
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 100px;
+    width: 120px;
     height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.page-count {
+    position: absolute;
+    top: 77px;
+    left: 11px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
 }

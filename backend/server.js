@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const cors = require('cors');
 const path = require('path');
@@ -9,6 +10,7 @@ app.use(cors());
 var logged_user_id = -1
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(bodyParser.json());
 
 // Multer configuration for file upload
 const storage = multer.diskStorage({
@@ -64,7 +66,7 @@ app.get("/users", (re, res) => {
 
 app.get("/books", (re, res) => {
     console.log("Grabbing All Books")
-    const sql = "SELECT title,current_page,total_pages,path_to_image FROM users INNER JOIN books ON users.user_id = books.user_id WHERE users.email = '" + re.query.email + "'";
+    const sql = "SELECT books.book_id, title,current_page,total_pages,path_to_image FROM users INNER JOIN books ON users.user_id = books.user_id WHERE users.email = '" + re.query.email + "'";
     db.query(sql, (err, data) =>{
         if (err) return res.json(err);
         return res.json(data);
@@ -81,7 +83,7 @@ app.get('/cover/:imageName', (req, res) => {
 
 app.get("/books_category", (re, res) => {
     console.log("Grabbing Category Specific Books");
-    const sql = "SELECT title,current_page,total_pages,path_to_image FROM books INNER JOIN book_category ON books.book_id = book_category.book_id WHERE category_id=" + re.query.c_id;
+    const sql = "SELECT books.book_id, title,current_page,total_pages,path_to_image FROM books INNER JOIN book_category ON books.book_id = book_category.book_id WHERE category_id=" + re.query.c_id;
     db.query(sql, (err, data) =>{
         if (err) return res.json(err);
         return res.json(data);
@@ -113,6 +115,24 @@ app.post('/addBook', upload.single('image'), (req, res) => {
     });
     
   });
+
+app.post('/updatePages', (req, res) => {
+    const { id, currentPage} = req.body;
+    sql = "UPDATE books SET current_page = " + currentPage + " WHERE book_id = " + id;
+    db.query(sql, (err, data) =>{
+        if (err) return res.json(err);
+        return res.status(200).json({ message: 'Book Successfully Updated' });
+    });
+});
+
+app.post('/addCategory', (req, res) => {
+    const { id, category} = req.body;
+    const sql = "INSERT INTO categories (user_id, category) VALUES (" + id + ",'" + category + "')";
+    db.query(sql, (err, data) =>{
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
 
 app.listen(8080, () => {
     console.log("Listening");

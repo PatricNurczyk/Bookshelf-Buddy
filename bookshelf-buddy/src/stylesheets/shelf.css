@@ -1,10 +1,14 @@
 .category-shelf{
     border-top: 5px solid rgb(49, 21, 4);
     border-bottom: 5px solid rgb(49, 21, 4);
+    width: 100%;
+    overflow-y: auto;
+    height: 250px;
 }
 
 .category{
     text-decoration: underline;
+    font-weight: bold;
 }
 
 .add-btn{
@@ -14,5 +18,4 @@
     height: 120px;
     background-color: transparent;
     border: none;
-    margin-bottom: 8%;
 }

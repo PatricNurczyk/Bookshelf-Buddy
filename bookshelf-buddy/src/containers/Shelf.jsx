@@ -6,7 +6,7 @@ import Book from "./Book";
 import "../stylesheets/shelf.css"
 
 
-function Shelf({category, user, addBookClick}) {
+function Shelf({category, user, addBookClick, updateTrigger, forceUpdate}) {
 
     const [books, setBooks] = useState([]);
 
@@ -29,7 +29,7 @@ function Shelf({category, user, addBookClick}) {
                 .catch(error => console.error(error));
             }
         }
-    },[user,category]);
+    },[user,category,updateTrigger]);
 
 
     return (
@@ -38,7 +38,7 @@ function Shelf({category, user, addBookClick}) {
             <Stack direction="horizontal" gap={4}>
             {books.length > 0 ? (
                     books.map((item, index) => (
-                        <Book item={item} index={index} />
+                        <Book item={item} index={index} forceUpdate={forceUpdate}/>
                     ))
             ) : (
                 <div></div>

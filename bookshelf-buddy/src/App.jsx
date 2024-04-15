@@ -29,6 +29,18 @@ function App() {
     });
   };
 
+  const newCat = async (category) => {
+    try{
+      const response = await axios.post('http://localhost:8080/addCategory', {
+        id : userID,
+        category : category
+      });
+      console.log('Category uploaded successfully:', response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setbookData({
@@ -75,7 +87,7 @@ function App() {
         .then(data => setUserID(data[0].user_id))
         .catch(error => console.error(error));
     }
-  }, []);
+  }, [user]);
 
 
   return (
@@ -95,7 +107,7 @@ function App() {
             </Stack>
           </Col>
           <Col className='shelf main-shelf p-0'>
-           <CategoryShelves user={isAuthenticated === true ? user.email : undefined} addBookClick={addBookClick}/>
+           <CategoryShelves newCat={newCat} user={isAuthenticated === true ? user.email : undefined} addBookClick={addBookClick}/>
           </Col>
         </Row>
       </Container>
