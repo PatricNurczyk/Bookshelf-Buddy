@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 function Book({item, index, forceUpdate}) {
 
+    
     const [image, setImage] = useState();
     const [trigger, setTrigger] = useState(false);
     const [currPage, setCurrPage] = useState(0);
@@ -59,8 +60,13 @@ function Book({item, index, forceUpdate}) {
         fetchImage();
       }, []); 
 
+    const handleDragStart = (event) => {
+        event.dataTransfer.setData('text/plain', item.book_id);
+        console.log("Dragging " + item.book_id);
+    };
+
     return(
-        <div draggable={true}>
+        <div className="book" draggable={true} onDragStart={handleDragStart}>
             <div className="book-container">
                 <button
                     style={{ backgroundImage: "url('" + image + "'" }}

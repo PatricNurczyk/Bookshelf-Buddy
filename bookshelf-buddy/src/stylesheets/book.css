@@ -50,3 +50,11 @@ border-radius: 10px;
     display: flex;
     justify-content: center;
 }
+
+.book:active {
+    cursor: grabbing;
+}
+
+.book.dragging {
+    opacity: 1;
+}

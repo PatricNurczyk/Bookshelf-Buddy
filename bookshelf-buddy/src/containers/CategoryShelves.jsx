@@ -4,6 +4,7 @@ import Stack from "react-bootstrap/Stack"
 import Popup from "./Popup";
 import axios from "axios";
 import "../stylesheets/scroll_cont.css"
+import {DndContext} from '@dnd-kit/core';
 
 
 function CategoryShelves({newCat, user, addBookClick}) {
@@ -43,6 +44,7 @@ function CategoryShelves({newCat, user, addBookClick}) {
     },[user, forceUpdate]);
 
     return (
+        <DndContext>
         <div className="scroll-container">
             <Stack>
                 <Shelf category={{category: "All Books", category_id: 0}} user={user} addBookClick={addBookClick} updateTrigger={forceUpdate} forceUpdate={handleForceUpdate}/>
@@ -75,7 +77,7 @@ function CategoryShelves({newCat, user, addBookClick}) {
                 </form>
             </Popup>
         </div>
-        
+        </DndContext>
     );
 }
 

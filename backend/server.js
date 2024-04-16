@@ -134,6 +134,15 @@ app.post('/addCategory', (req, res) => {
     });
 });
 
+app.post('/updateCategory', (req, res) => {
+    const { book_id, category_id } = req.body;
+    const sql = "INSERT INTO book_category (book_id, category_id) VALUES (" + book_id + "," + category_id + ")";
+    db.query(sql, (err, data) =>{
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.listen(8080, () => {
     console.log("Listening");
 });

@@ -5,6 +5,7 @@ import CategoryShelves from "./containers/CategoryShelves"
 import {Container, Row, Col, Stack } from 'react-bootstrap'
 import Popup from './containers/Popup';
 import axios from 'axios'
+import {DndContext} from '@dnd-kit/core'
 import './stylesheets/App.css'
 
 function App() {
