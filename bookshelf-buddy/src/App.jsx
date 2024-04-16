@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginManager from './containers/loginManager';
 import CategoryShelves from "./containers/CategoryShelves"
+import GoalShelf from "./containers/GoalShelf"
 import {Container, Row, Col, Stack } from 'react-bootstrap'
 import Popup from './containers/Popup';
 import axios from 'axios'
-import {DndContext} from '@dnd-kit/core'
 import './stylesheets/App.css'
 
 function App() {
@@ -85,7 +85,10 @@ function App() {
       console.log(url)
       fetch(url)
         .then(res => res.json())
-        .then(data => setUserID(data[0].user_id))
+        .then(data => {
+          console.log(data);
+          setUserID(data[0].user_id)
+        })
         .catch(error => console.error(error));
     }
   }, [user]);
@@ -103,9 +106,7 @@ function App() {
         </Row>
         <Row>
           <Col className='shelf trophy p-0' xs={5} md={3}>
-            <Stack>
-              Trophy Section
-            </Stack>
+            <GoalShelf user={isAuthenticated === true ? user.email : undefined}/>
           </Col>
           <Col className='shelf main-shelf p-0'>
            <CategoryShelves newCat={newCat} user={isAuthenticated === true ? user.email : undefined} addBookClick={addBookClick}/>

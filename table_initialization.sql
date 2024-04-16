@@ -2,6 +2,7 @@ USE `bookshelf_buddy`;
 
 
 CREATE USER 'bookshelf'@'localhost';
+GRANT ALL PRIVILEGES ON `bookshelf_buddy` TO 'bookshelf'@'localhost';
 ALTER USER 'bookshelf'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bookshelf_admin';
 
 DROP TABLE IF EXISTS book_category;

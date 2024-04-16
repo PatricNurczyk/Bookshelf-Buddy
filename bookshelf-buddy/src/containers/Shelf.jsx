@@ -83,7 +83,7 @@ function Shelf({category, user, addBookClick, updateTrigger, forceUpdate}) {
                 <div></div>
             )}
             {category.category === "All Books" ? (
-                <button className="add-btn" onClick={() => {addBookClick(category.category_id)}}></button>
+                <button className="add-icon" onClick={() => {addBookClick(category.category_id)}}></button>
             ) : (
                 <div></div>
             )}

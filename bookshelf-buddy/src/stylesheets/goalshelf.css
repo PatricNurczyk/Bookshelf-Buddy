@@ -1,0 +1,19 @@
+.goal {
+    align-self: center;
+
+}
+
+.goalName {
+    text-decoration: underline;
+}
+
+.goal-container{
+    position: relative;
+    border: 5px solid rgb(49, 21, 4);
+}
+
+.prog {
+    position: absolute;
+    bottom: 33%;
+    left: 43%;
+}

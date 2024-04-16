@@ -99,6 +99,15 @@ app.get("/category", (re, res) => {
     });
 });
 
+app.get("/goals", (re, res) => {
+    console.log("Grabbing Goals")
+    const sql = "SELECT * FROM users INNER JOIN goals ON users.user_id = goals.user_id WHERE users.email='" + re.query.email + "'";
+    db.query(sql, (err, data) =>{
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.post('/addBook', upload.single('image'), (req, res) => {
     const file = req.file;
     if (!file) {

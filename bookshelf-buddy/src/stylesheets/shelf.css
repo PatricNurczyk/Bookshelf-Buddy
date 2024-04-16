@@ -11,11 +11,12 @@
     font-weight: bold;
 }
 
-.add-btn{
+.add-icon{
     background-image: url('/add.png');
-    background-size: contain;
+    background-size: cover;
     width: 120px;
     height: 120px;
     background-color: transparent;
     border: none;
+    margin: auto 0px auto 0px;
 }
