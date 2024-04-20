@@ -12,8 +12,32 @@
     border: 5px solid rgb(49, 21, 4);
 }
 
+.graphic {
+    position: relative;
+}
+
 .prog {
     position: absolute;
-    bottom: 33%;
-    left: 43%;
+    bottom: 40%;
+    left: 45%;
+}
+
+.scroll-container {
+    height: 550px;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+}
+
+.goal-container .close-btn {
+    position: absolute;
+    top: 90%;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: red;
+    background-image: url("/close_btn.png");
+    background-size: cover;
+    border-radius: 7px;
+    z-index: 99;
 }

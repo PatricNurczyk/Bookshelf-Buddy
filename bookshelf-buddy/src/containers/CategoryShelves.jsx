@@ -6,7 +6,7 @@ import axios from "axios";
 import "../stylesheets/scroll_cont.css"
 
 
-function CategoryShelves({newCat, user, addBookClick}) {
+function CategoryShelves({uid, newCat, user, addBookClick, updateGoals}) {
 
     const [category, setCategory] = useState([]);
     const [catForm, setCatForm] = useState('');
@@ -45,10 +45,10 @@ function CategoryShelves({newCat, user, addBookClick}) {
     return (
         <div className="scroll-container">
             <Stack>
-                <Shelf category={{category: "All Books", category_id: 0}} user={user} addBookClick={addBookClick} updateTrigger={forceUpdate} forceUpdate={handleForceUpdate}/>
+                <Shelf updateGoals={updateGoals} uid={uid} category={{category: "All Books", category_id: 0}} user={user} addBookClick={addBookClick} updateTrigger={forceUpdate} forceUpdate={handleForceUpdate}/>
                 {category.length > 0 ? (
                     category.map((item, index) => (
-                        <Shelf category={item} user={user} onAddClick={addBookClick} updateTrigger={forceUpdate} forceUpdate={handleForceUpdate}/>
+                        <Shelf updateGoals={updateGoals} uid={uid} category={item} user={user} onAddClick={addBookClick} updateTrigger={forceUpdate} forceUpdate={handleForceUpdate}/>
                     ))
                 ) : (
                     <div></div>

@@ -1,12 +1,11 @@
 USE `bookshelf_buddy`;
 
 
-CREATE USER 'bookshelf'@'localhost';
+CREATE USER IF NOT EXISTS 'bookshelf'@'localhost' IDENTIFIED BY 'bookshelf_admin';
 GRANT ALL PRIVILEGES ON `bookshelf_buddy` TO 'bookshelf'@'localhost';
-ALTER USER 'bookshelf'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bookshelf_admin';
 
 DROP TABLE IF EXISTS book_category;
-DROP TABLE IF EXISTS book_goals;
+DROP TABLE IF EXISTS goals;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS users;
@@ -50,5 +49,6 @@ user_id INT,
 goal_name VARCHAR(100),
 goal_total INT,
 goal_progress INT,
+goal_date DATE,
 FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

@@ -41,4 +41,36 @@ https://www.figma.com/file/nj7N580HJRvEwlYmxicJZ2/The-Bookshelf-(Community)?type
 #### Interactive 
 https://www.figma.com/proto/nj7N580HJRvEwlYmxicJZ2/The-Bookshelf-(Community)?type=design&node-id=2010-840&t=Dtk6q2YoslwhnudB-1&scaling=contain&page-id=2010%3A838&mode=design
 
+## Installation
 
+1. Cloning the Repo to your local environment
+```
+git clone https://github.com/PatricNurczyk/Bookshelf-Buddy.git
+```
+2. Installing packages for backend and frontend
+```
+cd backend
+npm install
+cd ../bookshelf-buddy
+npm install
+```
+3. To set up the database, run the script table_initialization.py in MySQL terminal or MySQL workbench
+
+4. You will need to have 2 terminal windows open, one for the frontend React app, and one for the Express.js backend
+    1. Backend
+    ```
+    cd backend
+    npm start
+    ```
+    2. Frontend
+    ```
+    cd bookshelf-buddy
+    npm run dev
+    ```
+5. Navigate to http://localhost:5173
+
+## Dependencies 
+- Node.JS
+- React
+- Express.js
+- MySQL Server

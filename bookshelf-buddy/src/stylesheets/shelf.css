@@ -4,11 +4,13 @@
     width: 100%;
     overflow-x: auto;
     height: 250px;
+    position: relative;
 }
 
 .category{
     text-decoration: underline;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .add-icon{
@@ -19,4 +21,18 @@
     background-color: transparent;
     border: none;
     margin: auto 0px auto 0px;
+}
+
+.category-shelf .close-btn {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: red;
+    background-image: url("/close_btn.png");
+    background-size: cover;
+    border-radius: 7px;
+    z-index: 99;
 }

@@ -4,11 +4,12 @@ import axios from "axios";
 import "../stylesheets/book.css"
 import { useState, useEffect } from "react";
 
-function Book({item, index, forceUpdate}) {
+function Book({uid, item, index, forceUpdate, updateGoals}) {
 
     
     const [image, setImage] = useState();
     const [trigger, setTrigger] = useState(false);
+    const [triggerDelete, setTriggerDelete] = useState(false);
     const [currPage, setCurrPage] = useState(0);
 
     useEffect(() => {
@@ -38,8 +39,10 @@ function Book({item, index, forceUpdate}) {
 
         try{
           const response = await axios.post('http://localhost:8080/updatePages', {
+            uid : uid,
             id : item.book_id,
-            currentPage : currPage
+            currentPage : currPage,
+            total_pages : item.total_pages
           });
           console.log('Book Updated Successfully:', response.data);
         } catch (error) {
@@ -47,6 +50,7 @@ function Book({item, index, forceUpdate}) {
         }
         setTrigger(false);
         forceUpdate();
+        updateGoals();
       };
 
     const fetchImage = async () => {
@@ -65,18 +69,33 @@ function Book({item, index, forceUpdate}) {
         console.log("Dragging " + item.book_id);
     };
 
+    const confirmDelete = async () => {
+        const response = await axios.post('http://localhost:8080/deleteBook', {
+            id : item.book_id
+        });
+        console.log('Book Removed Successfully:', response.data);
+        setTriggerDelete(false);
+        forceUpdate();
+    };
+
     return(
         <div className="book" draggable={true} onDragStart={handleDragStart}>
+            <button className="close-btn" onClick={() => {setTriggerDelete(true)}}></button>
             <div className="book-container">
                 <button
                     style={{ backgroundImage: "url('" + image + "'" }}
                     className="p-2 book" 
                     key={index}
-                    onClick={() => setTrigger(true)}>
+                    onClick={() => setTrigger(true)}
+                    disabled={(item.current_page === item.total_pages) ? true : false}>
                     <progress className="custom-progress" value={currPage} max={item.total_pages} />
                 </button>
                 <div className="page-count">
+                {(item.current_page === item.total_pages) ? (
+                    <p>Completed</p>
+                ): (
                     <p>{currPage}/{item.total_pages}</p>
+                )}
                 </div>
             </div>
             <Popup title={item.title} trigger={trigger} onClose={setTrigger}>
@@ -96,6 +115,11 @@ function Book({item, index, forceUpdate}) {
                     Set Pages
                 </button>
                 </form>
+            </Popup>
+            <Popup title={"Confirm Delete"} trigger={triggerDelete} onClose={setTriggerDelete}>
+                <h3>Are you sure you want to remove {item.title}?</h3>
+                <br></br>
+                <button className="btn btn-success" onClick={confirmDelete}>Confirm Delete</button>
             </Popup>
         </div>
     );

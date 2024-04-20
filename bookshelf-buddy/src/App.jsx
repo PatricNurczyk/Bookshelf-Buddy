@@ -12,6 +12,7 @@ function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [userID, setUserID] = useState(0);
   const [buttonAddBook, setAddBook] = useState(false);
+  const [goalUpdate, setGoalUpdate] = useState(false);
   const [bookData, setbookData] = useState({
     title: '',
     pageCount: '',
@@ -37,6 +38,20 @@ function App() {
         category : category
       });
       console.log('Category uploaded successfully:', response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const addGoal = async (goalData) => {
+    try{
+      const response = await axios.post('http://localhost:8080/addGoal', {
+        user_id : userID,
+        goal_name : goalData.goal,
+        total : goalData.bookCount,
+        comp_date : goalData.compDate,
+      });
+      console.log('Goal uploaded successfully:', response.data);
     } catch (error) {
       console.log(error);
     }
@@ -93,6 +108,10 @@ function App() {
     }
   }, [user]);
 
+  const updateGoals = () => {
+    setGoalUpdate((prevForceUpdate) => !prevForceUpdate);
+  };
+
 
   return (
     <>
@@ -106,10 +125,10 @@ function App() {
         </Row>
         <Row>
           <Col className='shelf trophy p-0' xs={5} md={3}>
-            <GoalShelf user={isAuthenticated === true ? user.email : undefined}/>
+            <GoalShelf update={goalUpdate} addGoal={addGoal} user={isAuthenticated === true ? user.email : undefined}/>
           </Col>
           <Col className='shelf main-shelf p-0'>
-           <CategoryShelves newCat={newCat} user={isAuthenticated === true ? user.email : undefined} addBookClick={addBookClick}/>
+           <CategoryShelves updateGoals={updateGoals} uid={userID} newCat={newCat} user={isAuthenticated === true ? user.email : undefined} addBookClick={addBookClick}/>
           </Col>
         </Row>
       </Container>

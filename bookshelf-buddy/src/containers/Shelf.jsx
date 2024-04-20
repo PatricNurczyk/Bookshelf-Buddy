@@ -4,12 +4,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Stack from "react-bootstrap/Stack"
 import Book from "./Book";
 import axios from "axios";
+import Popup from "./Popup";
 import "../stylesheets/shelf.css"
 
 
-function Shelf({category, user, addBookClick, updateTrigger, forceUpdate}) {
+function Shelf({uid, category, user, addBookClick, updateTrigger, forceUpdate, updateGoals}) {
 
     const [books, setBooks] = useState([]);
+    const [triggerDelete, setTriggerDelete] = useState(false);
     const droppableRef = useRef(null);
 
     useEffect(() => {
@@ -70,14 +72,26 @@ function Shelf({category, user, addBookClick, updateTrigger, forceUpdate}) {
         }
     };
 
+    const confirmDelete = async () => {
+        const response = await axios.post('http://localhost:8080/deleteCat', {
+            id : category.category_id
+        });
+        console.log('Category Removed Successfully:', response.data);
+        setTriggerDelete(false);
+        forceUpdate();
+    };
+
 
     return (
         <div ref={droppableRef} className="category-shelf" onDrop={handleDrop} onDragOver={handleDragOver}>
             <span className="category">{category.category}</span>
+            {category.category !== "All Books" ? (
+                <button className="close-btn" onClick={() => {setTriggerDelete(true)}}></button>
+            ) : null}
             <Stack direction="horizontal" gap={4}>
             {books.length > 0 ? (
                     books.map((item, index) => (
-                        <Book item={item} index={index} forceUpdate={forceUpdate}/>
+                        <Book updateGoals={updateGoals} uid={uid} item={item} index={index} forceUpdate={forceUpdate}/>
                     ))
             ) : (
                 <div></div>
@@ -89,7 +103,14 @@ function Shelf({category, user, addBookClick, updateTrigger, forceUpdate}) {
             )}
             
             </Stack>
+            <Popup title={"Confirm Delete"} trigger={triggerDelete} onClose={setTriggerDelete}>
+                <h3>Are you sure you want to remove {category.category}?</h3>
+                <em>Books within the category will not be removed.</em>
+                <br></br>
+                <button className="btn btn-success" onClick={confirmDelete}>Confirm Delete</button>
+            </Popup>
         </div>
+        
     )
 }
 
