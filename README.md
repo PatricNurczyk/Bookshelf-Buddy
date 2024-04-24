@@ -54,7 +54,7 @@ npm install
 cd ../bookshelf-buddy
 npm install
 ```
-3. To set up the database, run the script table_initialization.py in MySQL terminal or MySQL workbench
+3. To set up the database, run the script table_initialization.sql in MySQL terminal or MySQL workbench
 
 4. You will need to have 2 terminal windows open, one for the frontend React app, and one for the Express.js backend
     1. Backend
